@@ -3,23 +3,41 @@ from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain_google_genai import GoogleGenerativeAIEmbeddings
 from langchain_community.vectorstores import Chroma
 from dotenv import load_dotenv
+from PyPDF2 import PdfReader
+from utils.ocr import perform_ocr, text_to_pdf
 import os
+
+def _looks_empty(pdf_path: str) -> bool:
+    """True if page 1 has no selectable text."""
+    try:
+        first_page = PdfReader(pdf_path).pages[0].extract_text()
+        return not first_page or len(first_page.strip()) == 0
+    except Exception:
+        return True
 
 def extract_pdf_text(pdfs):
     """
-    Extract text from PDF documents
-
-    Parameters:
-    - pdfs (list): List of PDF documents
-
-    Returns:
-    - docs: List of text extracted from PDF documents
+    Return a list[Document] for every PDF.
+    If the PDF has no selectable text, run OCR, dump it into
+    docs/<name>_ocr.pdf, then load that new PDF.
     """
     docs = []
     for pdf in pdfs:
         pdf_path = os.path.join("docs", pdf)
-        # Load text from the PDF and extend the list of documents
-        docs.extend(PyPDFLoader(pdf_path).load())
+
+        # 1️⃣ try normal extraction
+        native = PyPDFLoader(pdf_path).load()
+
+        # 2️⃣ if empty → OCR
+        if not native or _looks_empty(pdf_path):
+            print(f"OCR fallback for {pdf}")
+            text = perform_ocr(pdf_path)
+            if text.strip():
+                ocr_pdf = pdf_path.replace(".pdf", "_ocr.pdf")
+                text_to_pdf(text, ocr_pdf)
+                native = PyPDFLoader(ocr_pdf).load()
+
+        docs.extend(native)
     return docs
 
 def get_text_chunks(docs):
