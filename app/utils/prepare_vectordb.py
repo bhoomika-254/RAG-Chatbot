@@ -6,6 +6,7 @@ from dotenv import load_dotenv
 from PyPDF2 import PdfReader
 from utils.ocr import perform_ocr, text_to_pdf
 import os
+import sqlite3
 
 def _looks_empty(pdf_path: str) -> bool:
     """True if page 1 has no selectable text."""

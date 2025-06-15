@@ -1,3 +1,8 @@
+__import__('pysqlite3')
+import sys
+sys.modules['sqlite3'] = sys.modules.pop('pysqlite3')
+import sqlite3
+
 import streamlit as st
 import os
 from utils.save_docs import save_docs_to_vectordb
