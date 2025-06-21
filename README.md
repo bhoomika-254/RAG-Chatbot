@@ -8,11 +8,11 @@
 
 # Features 🚀:
 
-- 🔍 **Semantic Search** with ChromaDB
-- 📄 **PDF Parsing** with OCR fallback for scanned documents
-- 🧠 **LLM Integration** using Gemini 2.0 Flash
-- 💬 **Interactive UI** built with Streamlit
-- 📚 **Context-Aware QA** from custom documents
+- **Semantic Search** with ChromaDB
+- **PDF Parsing** with OCR fallback for scanned documents
+- **LLM Integration** using Gemini 2.0 Flash
+- **Interactive UI** built with Streamlit
+- **Context-Aware QA** from custom documents
 
 # Tech Stack 🛠️: 
 
