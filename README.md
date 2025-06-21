@@ -1,12 +1,12 @@
-# RAG - ChatBot: 
+# RAG - ChatBot 🤖: 
 
 - A Retrieval-Augmented Generation (RAG) based chatbot built using **Gemini 2.0 Flash**, **ChromaDB**, and **Streamlit**. This application allows users to query documents with enhanced context-aware responses powered by large language models and semantic vector search.
 
 ![snapshot of the webapp](image.png)
 
-# Deployed link - https://rag-based-chatbott.streamlit.app/
+# link - https://rag-based-chatbott.streamlit.app/
 
-# Features:
+# Features 🚀:
 
 - 🔍 **Semantic Search** with ChromaDB
 - 📄 **PDF Parsing** with OCR fallback for scanned documents
@@ -14,7 +14,7 @@
 - 💬 **Interactive UI** built with Streamlit
 - 📚 **Context-Aware QA** from custom documents
 
-# Tech Stack: 
+# Tech Stack 🛠️: 
 
 | Tool        | Purpose                        |
 |-------------|--------------------------------|
